@@ -1,4 +1,4 @@
 ---
-container_name: brian-yolo-backend
+container_name: cattherinemirobe_yolo_backend
 network: app-net
 volume: app-mongo-data/app

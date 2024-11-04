@@ -1,0 +1,4 @@
+---
+container_name: cattherinemirobe_yolo_frontend
+network: app-net
+volume: app-mongo-data/app
