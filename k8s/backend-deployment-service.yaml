@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  labels:
+    app: backend
+spec:
+  replicas: 3  # Number of replicas of the back-end application
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: cattherinemirobe/yolo_backend:v1.0.0.0  # Docker image for the back-end
+          ports:
+            - containerPort: 5000  # Back-end service port
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "1"
+            requests:
+              memory: "256Mi"
+              cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+spec:
+  selector:
+    app: backend  # Matches the label of the back-end pods
+  ports:
+    - protocol: TCP
+      port: 5000       # External service port
+      targetPort: 5000  # Port the container listens on
+  type: ClusterIP      # Internal-only service within the cluster
